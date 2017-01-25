@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'ProjetoPesquisa/home.html' %}
+
+{% block content %}
+<p>
+   <a class="btn btn-default" href="{% url 'CategoriaNew' %}"><span class="glyphicon glyphicon glyphicon-plus"></span> Novo</a>
+</p>
+<table class="table table-striped table-bordered">
+  <caption>Categorias</caption>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Sigla</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for categoria in categorias %}
+	    <tr>
+	      <td>{{ categoria.nome }}</td>
+	      <td>{{ categoria.sigla }}</td>
+	      <td>
+		      <a class="btn btn-warning" href="{% url 'CategoriaEdit' pk=categoria.pk %}"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+	          <a class="btn btn-danger" href="{% url 'CategoriaDelete' pk=categoria.pk %}"><span class="glyphicon glyphicon glyphicon-remove"></span> Remover</a>
+          </td>
+	    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}
