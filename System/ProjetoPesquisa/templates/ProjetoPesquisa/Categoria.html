@@ -21,7 +21,7 @@
 	      <td>{{ categoria.sigla }}</td>
 	      <td>
 		      <a class="btn btn-warning" href="{% url 'CategoriaEdit' pk=categoria.pk %}"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
-	          <a class="btn btn-danger" href="{% url 'CategoriaDelete' pk=categoria.pk %}"><span class="glyphicon glyphicon glyphicon-remove"></span> Remover</a>
+	          <a class="btn btn-danger" onclick="AskMessage('Deseja realmente deletar está categoria?','Categoria','CategoriaDelete', {{ categoria.pk }})"><span class="glyphicon glyphicon glyphicon-remove"></span> Remover</a>{% csrf_token %}
           </td>
 	    </tr>
     {% endfor %}

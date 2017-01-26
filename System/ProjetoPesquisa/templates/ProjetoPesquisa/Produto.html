@@ -20,10 +20,14 @@
 	    <tr>
 	      <td>{{ produto.nome }}</td>
 	      <td>{{ produto.categoria }}</td>
-          <td>{{ produto.situacao }}</td>
+	      {% if produto.situacao %}
+              <td>Ativo</td>
+          {% else %}  
+              <td>Inativo</td>
+          {% endif %}    
 	      <td>
 		      <a class="btn btn-warning" href="{% url 'ProdutosEdit' pk=produto.pk %}"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
-	          <a class="btn btn-danger" href="{% url 'ProdutosDelete' pk=produto.pk %}"><span class="glyphicon glyphicon glyphicon-remove"></span> Remover</a>
+              <a class="btn btn-danger" href="{% url 'AskMessage' message='Deseja realmente deletar este produto?' prev_link='Produtos' action_link='ProdutosDelete' pk=produto.pk %}"><span class="glyphicon glyphicon glyphicon-remove"></span> Remover</a>
           </td>
 	    </tr>
     {% endfor %}

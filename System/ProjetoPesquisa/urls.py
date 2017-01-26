@@ -8,6 +8,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home),
+    url(r'^Systema/AskMessage/(?P<message>[^/]+)/(?P<prev_link>[^/]+)/(?P<action_link>[^/]+)/(?P<pk>[0-9]+)/$', views.AskMessageLocal, name='AskMessage'),
+    url(r'^Systema/AskMessage/$', views.AskMessage),
     url(r'^Categoria/$', views.Categoria, name='Categoria'),
     url(r'^Categoria/new/$', views.Categoria_new, name='CategoriaNew'),
     url(r'^Categoria/(?P<pk>[0-9]+)/edit/$', views.Categoria_edit, name='CategoriaEdit'),

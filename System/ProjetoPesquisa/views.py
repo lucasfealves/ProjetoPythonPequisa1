@@ -1,13 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Categorias, Produtos
 from .forms import CategoriaForm, ProdutosForm
-#import pymsgbox
-#from tkinter import messagebox
-#import tkinter
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def home(request):
     return render(request, 'ProjetoPesquisa/home.html', {})
+@csrf_exempt
+def AskMessage(request):
+    return AskMessageLocal(request, request.POST.get("message"), request.POST.get("prev_link"), request.POST.get("action_link"), request.POST.get("id_pk"))
+def AskMessageLocal(request, message, prev_link, action_link, pk):
+    return render(request, 'ProjetoPesquisa/AskMessage.html', {'message': message, 'prev_link': prev_link, 'action_link': action_link, 'pk': pk })
 def Categoria(request):
     categorias = Categorias.objects.order_by('nome')
     return render(request, 'ProjetoPesquisa/Categoria.html', {'categorias': categorias})
@@ -35,10 +38,6 @@ def Categoria_edit(request, pk):
 def Categoria_delete(request, pk):
     categoria = get_object_or_404(Categorias, pk=pk)
     categoria.delete()
-    # response = pymsgbox.confirm(text='Deseja realmente deletar este registro', title='Alerta de Sistema', buttons=['OK', 'Cancel'])
-    #response = messagebox.askyesno('Alerta de Sistema','Deseja realmente deletar este registro?')
-    #sleep(1000)
-    #if response:
     return redirect('Categoria')
 def Produto(request):
     produtos = Produtos.objects.order_by('nome')

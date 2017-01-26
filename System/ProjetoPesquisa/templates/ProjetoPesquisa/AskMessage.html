@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends 'ProjetoPesquisa/home.html' %}
+
+{% block content %}
+    
+    <div class="confirmation-box alert alert-warning">
+        <h3>{{ message }}</h3>
+        <form action="{% url action_link pk=pk %}" method="post">{% csrf_token %}
+            <input type="hidden" name="next" value="{{ prev_link }}" />
+            <a class="btn btn-default" href="{% url prev_link %}">Não</a>
+            <input class="btn btn-success pull-right" type="submit" value="Sim" />
+        </form>
+    </div>
+
+{% endblock %}
